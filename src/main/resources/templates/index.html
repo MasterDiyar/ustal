@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Музыкальная библиотека</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .actions button {
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+<div style="max-width: 800px; margin: auto; padding: 20px;">
+    <div style="margin-bottom: 10px;">
+        <input type="text" id="id" placeholder="Поиск альбома...">
+        <button type="submit"  >Поиск</button>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Альбом</th>
+            <th>Длительность</th>
+            <th>Автор</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody id="albumTable">
+        <tr th:each="album : ${albums}">
+            <td th:text="${album.id}"></td>
+            <td th:text="${album.album}"></td>
+            <td th:text="${album.length}"></td>
+            <td th:text="${album.author}"></td>
+            <td>
+                <form th:action="@{/main(delete_id=${album.id})}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+                <form th:action="@{/main/edit(update_id=${album.id})}" method="get">
+                    <button type="submit">Edit</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 10px; text-align: center;">
+        <form action="/main/add">
+            <button>add</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
