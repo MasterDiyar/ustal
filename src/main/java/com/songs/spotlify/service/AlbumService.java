@@ -18,11 +18,11 @@ public class AlbumService {
         return albumsRepository.findAll();
     }
 
-    public Albums saveAlbum(Albums album) {
-        return albumsRepository.save(album);
+    public void saveAlbum(Albums album) {
+        albumsRepository.save(album);
     }
 
-    public Albums getAlbumById(int id) {
+    public Albums getAlbumById(long id) {
         List<Albums> albums = albumsRepository.findAll();
         for (Albums album : albums) {
             if (album.getId() == id) {

@@ -41,12 +41,11 @@
 </head>
 <body>
 <div class="container">
-    <form action = "/main" method = "post">
-    <h2>Добавить альбом</h2>
-    <input type="text" id="album"  placeholder="Название альбома">
-    <input type="text" id="length" placeholder="Длительность">
-    <input type="text" id="author" placeholder="Автор">
-    <button >Добавить</button>
+    <form th:action="@{/main/add}" method="post" th:object="${album}">
+        <input type="text" th:field="*{album}" placeholder="Название альбома">
+        <input type="number" th:field="*{length}" placeholder="Длина">
+        <input type="text" th:field="*{author}" placeholder="Автор">
+        <button type="submit">Добавить</button>
     </form>
 </div>
 

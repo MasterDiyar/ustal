@@ -16,6 +16,14 @@ public class Albums {
     private int length;
     private String author;
 
+    public Albums() {}
+
+    public Albums(String album, int length, String author) {
+        this.album = album;
+        this.length = length;
+        this.author = author;
+    }
+
     public String toString(){
         return "Album{" +
                 "album='" + album + '\'' +

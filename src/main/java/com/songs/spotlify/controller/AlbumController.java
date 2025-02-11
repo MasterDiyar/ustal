@@ -45,8 +45,8 @@ public class AlbumController {
     }
 
     @GetMapping("/main/search")
-    public String getAlbum(@RequestParam("id") int id, Model model) {
-        Albums albums = albumService.getAlbumById(id);
+    public String getAlbum(@RequestParam String id, Model model) {
+        Albums albums = albumService.getAlbumById(Integer.parseInt(id));
         model.addAttribute("albums", albums);
         return "index";
     }
@@ -57,10 +57,7 @@ public class AlbumController {
     }
 
     @PostMapping("main/add")
-    public String addAlbum(@RequestParam String album, @RequestParam int length, @RequestParam String author, Albums albums) {
-        albums.setAlbum(album);
-        albums.setLength(length);
-        albums.setAuthor(author);
+    public String addAlbum(@ModelAttribute Albums albums) {
         albumService.saveAlbum(albums);
         return "redirect:/main";
     }
