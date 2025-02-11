@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Музыкальная библиотека</title>
     <style>
+        *{
+            margin: 0;
+            background-color: #303030;
+            color: #f4f4f4;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -15,7 +20,7 @@
             text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: rgba(60, 60, 60, 0.18);
         }
         .actions button {
             margin: 2px;
@@ -23,18 +28,24 @@
     </style>
 </head>
 <body>
-<div style="max-width: 800px; margin: auto; padding: 20px;">
-    <div style="margin-bottom: 10px;">
+<div style="max-width: 800px; margin: auto; padding: 0px;">
+    <div style="margin-bottom: 10px; border-bottom: 2px ; border-color:#f4f4f4;">
+        <div>
+            <img th:src="@{/resources/templates/spotlify.svg}" width="50" height="50">
+        </div>
+        <div align="right">
         <form th:action="@{/main/search}" method="get">
             <input type="text" id="id" name="id" placeholder="Поиск альбома...">
             <button type="submit">Поиск</button>
+
         </form>
+        </div>
     </div>
     <table>
         <thead>
         <tr>
             <th>ID</th>
-            <th>Альбом</th>
+            <th> <a th:href="@{/main/sort}">Album</a></th>
             <th>Длительность</th>
             <th>Автор</th>
             <th>Действия</th>

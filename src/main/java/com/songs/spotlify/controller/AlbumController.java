@@ -24,23 +24,22 @@ public class AlbumController {
         return "index";
     }
     @PostMapping("/main{delete_id}")
-    public String deleteAlbum(@ModelAttribute int delete_id) {
-        albumService.deleteAlbum((long) delete_id);
+    public String deleteAlbum(@ModelAttribute("delete_id") long delete_id) {
+        albumService.deleteAlbum( delete_id);
         return "redirect:/main";
     }
 
     @GetMapping("main/edit")
-    public String editAlbum(@ModelAttribute int edit_id) {
-        albumService.deleteAlbum((long) edit_id);
+    public String editAlbum(@ModelAttribute Albums album, Model model) {
+        model.addAttribute("album", new Albums());
+        albumService.deleteAlbum((long) album.getId());
         return "addit";
     }
 
     @PostMapping("/main/edit")
-    public String editAlbum(@RequestParam String album, @RequestParam int length, @RequestParam String author, Albums albums) {
-        albums.setAlbum(album);
-        albums.setLength(length);
-        albums.setAuthor(author);
+    public String edityAlbum(@ModelAttribute Albums albums, Model model) {
         albumService.saveAlbum(albums);
+        model.addAttribute("albums", albums);
         return "redirect:/main";
     }
 
@@ -57,8 +56,15 @@ public class AlbumController {
     }
 
     @PostMapping("main/add")
-    public String addAlbum(@ModelAttribute Albums albums) {
+    public String addAlbum(@ModelAttribute Albums albums, Model model) {
         albumService.saveAlbum(albums);
+        model.addAttribute("albums", albums);
         return "redirect:/main";
+    }
+
+    @GetMapping("main/sort")
+    public String sortAlbum(Model model) {
+        model.addAttribute("albums", albumService.getAllSortedAlbums());
+        return "index";
     }
 }
